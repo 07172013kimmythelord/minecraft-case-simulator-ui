@@ -56,3 +56,27 @@ body {
 .purple{box-shadow:inset 0 0 0 2px #9b6bff}
 .gray{box-shadow:inset 0 0 0 2px #aaa}
 .yellow{box-shadow:inset 0 0 0 2px #ffd84f}
+.result {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn .3s ease;
+  z-index: 10;
+}
+
+.result h2 {
+  margin-bottom: 10px;
+}
+
+.result span {
+  opacity: .7;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
