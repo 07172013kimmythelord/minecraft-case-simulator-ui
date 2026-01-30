@@ -114,3 +114,23 @@ body {
 function saveInventory() {
   localStorage.setItem("inventory", JSON.stringify(inventory));
 }
+.inventory {
+  padding: 30px;
+}
+
+.item {
+  background: #1b1f44;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item button {
+  background: #4fd17b;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+}
