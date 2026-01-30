@@ -58,3 +58,63 @@ document.querySelectorAll(".case").forEach(c => {
 
   c.onclick = () => openCase(name, price);
 });
+const legendaryItems = [
+  { name: "Netherite Sword", material: "Netherite", weight: 8 },
+  { name: "Dragon Egg", material: "Dragon", weight: 12 },
+  { name: "Beacon", material: "Obsidian", weight: 15 },
+  { name: "Totem of Undying", material: "Gold", weight: 6 }
+];
+
+const materialValues = {
+  Wood: 1,
+  Stone: 2,
+  Iron: 5,
+  Gold: 8,
+  Diamond: 12,
+  Netherite: 20,
+  Obsidian: 6,
+  Dragon: 30
+};
+let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
+function showResult(caseName, rarity) {
+  let item = null;
+
+  if (rarity.name === "Legendary") {
+    item = legendaryItems[Math.floor(Math.random() * legendaryItems.length)];
+    legendaryAnimation(item);
+  } else {
+    item = {
+      name: rarity.name + " Item",
+      material: "Iron",
+      weight: 2
+    };
+    normalResult(item, rarity);
+  }
+
+  inventory.push(item);
+  saveInventory();
+}
+function legendaryAnimation(item) {
+  const overlay = document.createElement("div");
+  overlay.className = "legendary";
+
+  overlay.innerHTML = `
+    <h1>✨ LEGENDARY ✨</h1>
+    <h2>${item.name}</h2>
+    <p>${item.material} • Weight ${item.weight}</p>
+  `;
+
+  document.body.appendChild(overlay);
+
+  setTimeout(() => overlay.remove(), 3500);
+}
+function normalResult(item, rarity) {
+  const div = document.createElement("div");
+  div.className = "result";
+  div.innerHTML = `
+    <h2>${item.name}</h2>
+    <p style="color:${rarity.color}">${rarity.name}</p>
+  `;
+  document.body.appendChild(div);
+  setTimeout(() => div.remove(), 2000);
+}
