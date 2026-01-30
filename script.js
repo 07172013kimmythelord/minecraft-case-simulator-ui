@@ -118,3 +118,29 @@ function normalResult(item, rarity) {
   document.body.appendChild(div);
   setTimeout(() => div.remove(), 2000);
 }
+function renderInventory() {
+  const list = document.getElementById("inventoryList");
+  list.innerHTML = "";
+
+  inventory.forEach((item, i) => {
+    const value = item.weight * materialValues[item.material];
+
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <span>${item.name} (${item.material})</span>
+      <button>Sell $${value}</button>
+    `;
+
+    div.querySelector("button").onclick = () => sellItem(i, value);
+    list.appendChild(div);
+  });
+}
+
+function sellItem(index, value) {
+  inventory.splice(index, 1);
+  balance += value;
+  balanceEl.textContent = `$${balance}`;
+  saveInventory();
+  renderInventory();
+}
